@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sara Gebara | Computer Science Student</title>
+
+  <!-- This one line tells the CSS "JavaScript is working", so the pop-up
+       animations only hide things when they are actually going to appear. -->
+  <script>document.documentElement.classList.add("js");</script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- nav bar -->
+  <nav class="nav" id="nav" aria-label="Main">
+    <a class="nav-home" href="#about" aria-label="Back to top">
+      <img src="images/home-icon.png" alt="">
+    </a>
+    <!-- <a href="#about">about</a> TODO: get rid of about or home icon -->
+    <a href="#experience">experience</a>
+    <a href="#projects">projects</a>
+    <a href="#contact">contact</a>
+  </nav>
+
+  <main>
+
+    <!-- main hero page -->
+    <section class="scene hero" id="about">
+      <div class="canvas">
+
+        <!-- sky -->
+        <img class="sprite clouds"    src="images/clouds.png"    alt="" style="--x:1458; --y:192;  --w:613">
+        <img class="sprite sky-birds" src="images/sky-birds.png" alt="" style="--x:2015; --y:219;  --w:72">
+
+        <!-- right island -->
+        <img class="sprite ground-right" src="images/ground-right.png" alt="" style="--x:1817; --y:1200; --w:543">
+
+        <!-- trees on the left island -->
+        <img class="sprite tree-small"  src="images/tree-dark.png"  alt="" style="--x:0;   --y:201; --w:197">
+        <img class="sprite tree-med" src="images/tree-light.png" alt="" style="--x:175; --y:136; --w:328">
+        <img class="sprite tree-large"   src="images/tree-big.png"   alt="" style="--x:344; --y:16;  --w:525">
+        <img class="sprite bird"       src="images/bird.png"       alt="" style="--x:598; --y:293; --w:27">
+
+        <!-- left island -->
+        <img class="sprite ground-left" src="images/ground-left.png" alt="" style="--x:102; --y:924; --w:438">
+        <img class="sprite island-left" src="images/island-left.png" alt="" style="--x:0;   --y:554; --w:918">
+        <img class="sprite bush-left"   src="images/bush-left.png"   alt="" style="--x:0;   --y:516; --w:626">
+        <img class="sprite berries"     src="images/berries.png"     alt="" style="--x:0;   --y:849; --w:193">
+        <img class="sprite bear"        src="images/bear.png"        alt="" style="--x:262; --y:804; --w:143">
+        <img class="sprite fish"        src="images/fish.png"        alt="" style="--x:242; --y:1018; --w:67">
+        <img class="sprite flowers"     src="images/flowers.png"     alt="" style="--x:29;  --y:621; --w:164">
+        <img class="sprite bunny"       src="images/bunny.png"       alt="" style="--x:681; --y:780; --w:71">
+
+        <!-- right island -->
+        <img class="sprite island-right" src="images/island-right.png" alt="" style="--x:1263; --y:873;  --w:1097">
+        <img class="sprite bush-right"   src="images/bush-right.png"   alt="" style="--x:1632; --y:816;  --w:728">
+        <img class="sprite rocks"        src="images/rocks.png"        alt="" style="--x:1605; --y:1006; --w:420">
+        <img class="sprite pond"         src="images/pond.png"         alt="" style="--x:1632; --y:1021; --w:364">
+        <img class="sprite duck-swim"    src="images/duck-swim.png"    alt="" style="--x:1732; --y:1037; --w:102">
+        <img class="sprite duck-stand"   src="images/duck-stand.png"   alt="" style="--x:1870; --y:959;  --w:75">
+        <img class="sprite reeds"        src="images/reeds.png"        alt="" style="--x:2123; --y:994;  --w:162">
+        <img class="sprite deer"         src="images/deer.png"         alt="" style="--x:1372; --y:780;  --w:167">
+
+        <!-- the words in the middle -->
+        <div class="hero-text">
+          <div class="hero-title">
+            <img class="hero-avatar" src="images/avatar-hero.png" alt="Illustration of Sara">
+            <h1><span class="green">Hello! I'm</span> <span class="brown">Sara.</span></h1>
+          </div>
+          <p class="hero-blurb">
+            I'm a 3rd year CS student @ UWindsor, passionate<br>
+            about making people's lives easier through<br>
+            AI, ML, and human-centered design.
+          </p>
+          <a class="resume-btn" href="resume.pdf" target="_blank" rel="noopener">resume</a>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- experience sprout -->
+    <section class="scene experience" id="experience">
+      <div class="canvas">
+
+        <!-- (y numbers are measured from the top of this section) -->
+        <img class="sprite ripples"      src="images/ripples.png"      alt="" style="--x:1788; --y:96;  --w:254" loading="lazy">
+        <img class="sprite flower-plant" src="images/flower-plant.png" alt="" style="--x:1644; --y:797; --w:716" loading="lazy">
+        <img class="sprite girl"         src="images/girl.png"         alt="" style="--x:1835; --y:581; --w:199" loading="lazy">
+
+        <!-- sprout leaves -->
+        <h2 class="sprout-title"><img src="images/sprout-top.png" alt="Experience"></h2>
+
+        <!-- stem + entries -->
+        <div class="stem">
+          <img class="stem-img" src="images/stem-mid.png" alt="" loading="lazy">
+
+          <article class="entry left reveal">
+            <img class="logo" src="images/logo-idir.jpg" alt="">
+            <p class="entry-date">Oct. 2026 – Present</p>
+            <div class="entry-text">
+              <h3>ML Intern</h3>
+              <p class="entry-org">Institute of Diagnostic Imaging Research</p>
+              <p class="entry-desc">Developing a <strong>computer vision</strong> pipeline in <strong>Python</strong> to detect weld flaws in <strong>400k+ ultrasonic scans</strong>.</p>
+            </div>
+          </article>
+
+          <article class="entry right reveal">
+            <img class="logo" src="images/logo-glendor.jpg" alt="">
+            <p class="entry-date">Sept. 2026 – Present</p>
+            <div class="entry-text">
+              <h3>AI Intern</h3>
+              <p class="entry-org">Glendor, Inc.</p>
+              <p class="entry-desc">Testing whether fine-tuned LLMs <strong>leak health data</strong> (PHI).</p>
+            </div>
+          </article>
+
+          <article class="entry left reveal">
+            <img class="logo" src="images/logo-uwindsor.jpg" alt="">
+            <p class="entry-date">May 2026 – Present</p>
+            <div class="entry-text">
+              <h3>Research Assistant</h3>
+              <p class="entry-org">DeVeale Lab, University of Windsor</p>
+              <p class="entry-desc">Built a <strong>RAG chatbot</strong> that answers FAQs for <strong>30+ lab members</strong>.</p>
+            </div>
+          </article>
+
+          <article class="entry right reveal">
+            <img class="logo" src="images/logo-uwindsor.jpg" alt="">
+            <p class="entry-date">Sept. 2025 – Present</p>
+            <div class="entry-text">
+              <h3>Teaching Assistant</h3>
+              <p class="entry-org">University of Windsor</p>
+              <p class="entry-desc">Lead weekly <strong>C</strong> labs for <strong>50+ students</strong>.</p>
+            </div>
+          </article>
+
+          <article class="entry left reveal">
+            <img class="logo" src="images/logo-rbc-borealis.jpg" alt="">
+            <p class="entry-date">Oct. 2025 – Dec. 2025</p>
+            <div class="entry-text">
+              <h3>Let's SOLVE It Mentee</h3>
+              <p class="entry-org">RBC Borealis</p>
+              <p class="entry-desc">Took <strong>ReadingBudd.AI</strong> from prototype to a deployed app, adding speech and <strong>AI image generation</strong>.</p>
+            </div>
+          </article>
+
+          <article class="entry right reveal">
+            <img class="logo" src="images/logo-ai4good.jpg" alt="">
+            <p class="entry-date">May 2025 – Jun. 2025</p>
+            <div class="entry-text">
+              <h3>Machine Learning Fellow</h3>
+              <p class="entry-org">AI4Good Lab</p>
+              <p class="entry-desc">Co-built <strong>ReadingBudd.AI</strong>, a reading tool for neurodivergent kids, with a <strong>team of 6</strong>.</p>
+            </div>
+          </article>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- projects -->
+    <section class="scene hill" id="projects">
+      <div class="canvas">
+
+        <img class="hill-top" src="images/hill-top.png" alt="" loading="lazy">
+
+        <div class="hill-body">
+          <!-- wooden sign and horse sit on the hill -->
+          <h2 class="sign"><img src="images/sign.png" alt="Projects"></h2>
+          <img class="sprite horse" src="images/horse.png" alt="" style="--x:1249; --y:-351; --w:382" loading="lazy">
+
+          <div class="projects-grid">
+
+            <article class="card reveal">
+              <div class="card-img">
+                <img class="card-img" src="images/project-careercoach.jpg" alt="Screenshot of CareerCoach">
+              </div>
+              <p class="card-date">Jul. 2026</p>
+              <h3>CareerCoach</h3>
+              <ul class="tags">
+                <li>React</li><li>TypeScript</li><li>Gemma 4</li><li>Ollama</li>
+              </ul>
+              <p><strong>Won GDG Windsor's Gemma Hackathon</strong> with an AI mock-interview app (team of 5).</p>
+              <a class="card-link" href="https://github.com/sidhu66/Gemma_Hackathon_Summer_2026" target="_blank" rel="noopener">view project ↗</a>
+            </article>
+
+            <article class="card reveal">
+              <div class="card-img">
+                <img class="card-img" src="images/project-pure-leaf.png" alt="Screenshot of PureLeaf">
+              </div>
+              <p class="card-date">Apr. 2026</p>
+              <h3>PureLeaf</h3>
+              <ul class="tags">
+                <li>TypeScript</li><li>React Native</li><li>Expo Go</li><li>Gemini 2.5 Flash</li>
+              </ul>
+              <p><strong>Won Best Use of Gemini at ClubHacks</strong> with a solo app that gamifies litter cleanup.</p>
+              <a class="card-link" href="https://github.com/saragebara/pure-leaf" target="_blank" rel="noopener">view project ↗</a>
+            </article>
+
+            <article class="card reveal">
+              <div class="card-img">
+                <img class="card-img" src="images/project-myadvice.png" alt="Screenshot of myAdvice">
+              </div>
+              <p class="card-date">Feb. 2026 – Mar. 2026</p>
+              <h3>myAdvice</h3>
+              <ul class="tags">
+                <li>Spring Boot</li><li>JavaFX</li><li>MariaDB</li><li>SQL</li>
+              </ul>
+              <p>Led a <strong>team of 4</strong> building an advising system that cut navigation steps by <strong>80%</strong>.</p>
+              <a class="card-link" href="https://github.com/saragebara/myadvice" target="_blank" rel="noopener">view project ↗</a>
+            </article>
+
+          </div>
+        </div>
+
+        <img class="hill-bottom" src="images/hill-bottom.png" alt="" loading="lazy">
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- footer/contact -->
+  <footer class="scene footer" id="contact">
+    <div class="canvas">
+      <img class="sprite footer-avatar" src="images/avatar-footer.png" style="--x:680; --y:105; --w:246" loading="lazy">
+
+      <p class="thanks">thanks for stopping by!</p>
+
+      <a class="sprite social" href="https://github.com/saragebara" target="_blank" rel="noopener" aria-label="GitHub" style="--x:1029; --y:211; --w:85">
+        <img src="images/icon-1.png" alt="">
+      </a>
+      <a class="sprite social" href="https://www.linkedin.com/in/sara-gebara" target="_blank" rel="noopener" aria-label="LinkedIn" style="--x:1159; --y:210; --w:85">
+        <img src="images/icon-2.png" alt="">
+      </a>
+      <a class="sprite social" href="mailto:gebaras@uwindsor.ca" aria-label="Email" style="--x:1295; --y:211; --w:85">
+        <img src="images/icon-3.png" alt="">
+      </a>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

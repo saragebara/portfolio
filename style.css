@@ -1,0 +1,473 @@
+/* drawing is 2360 pixels wide originally so CSS is based off this
+   --s = width of screen / 2360 to scale things properly
+   for mobile it's forced to stay at least 900px wide/centered */
+
+
+/* fonts */
+@font-face {
+  font-family: "Mali";  /* title font */
+  font-weight: 700;
+  src: url("fonts/mali-latin-700-normal.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gamja Flower";  /* body text */
+  src: url("fonts/gamja-flower-latin-400-normal.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gochi Hand";  /* footer font */
+  src: url("fonts/gochi-hand-latin-400-normal.woff2") format("woff2");
+  font-display: swap;
+}
+
+
+/* colors, fonts, scaling */
+:root {
+  --brown:       #6e533a;
+  --brown-light: #8b694a;
+  --green:       #bece68;
+  --hill:        #c1d16b;
+
+  --font-title: "Mali", "Comic Sans MS", cursive;
+  --font-body:  "Gamja Flower", "Comic Sans MS", cursive;
+  --font-note:  "Gochi Hand", "Comic Sans MS", cursive;
+
+  --canvas-w: max(100vw, 900px); /* width */
+  --s: calc(var(--canvas-w) / 2360);    /* scale, pixels based on drawing */
+
+  /* text size for entries and cards 
+  grows with the screen, but never smaller than 15px or bigger than 19px */
+  --text-size: clamp(15px, calc(var(--s) * 34), 19px);
+}
+
+
+/* basics */
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: #fff;
+  color: var(--brown);
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.35;
+}
+
+img { display: block; }
+
+a { color: inherit; }
+
+/* visible outline for tab key so i can play and have fun */
+:focus-visible {
+  outline: 3px solid var(--green);
+  outline-offset: 3px;
+}
+
+/* screen reader text */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+
+/* scenes/sprites */
+/* scenes: hero, experience, projects, footer */
+
+.scene {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* "canvas" is the 2360-design-pixel-wide drawing area inside a scene.
+   centered, so middle part is seen on phone */
+.canvas {
+  position: relative;
+  width: var(--canvas-w);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.sprite {
+  position: absolute;
+  left:  calc(var(--s) * var(--x));
+  top:   calc(var(--s) * var(--y));
+  width: calc(var(--s) * var(--w));
+  height: auto;
+}
+.sprite img { width: 100%; height: auto; }
+
+
+/* nav bar */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  height: 36px;
+  padding: 0 22px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 26px;
+  font-size: 18px;
+  background: rgba(255, 255, 255, 0.31);
+  border-bottom: 1px solid rgba(110, 83, 58, 0.08);
+  transition: background 0.3s;
+}
+/* makes nav bar solid on scroll */
+/* .nav.scrolled { background: rgba(255, 255, 255, 0.95); } */
+
+.nav a {
+  text-decoration: none;
+  letter-spacing: 0.05em;
+}
+.nav a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.nav-home img { width: 12px; height: auto; }
+
+
+/* hero */
+.hero { height: calc(var(--s) * 1260); }
+.hero .canvas { height: 100%; }
+
+.hero-text {
+  position: absolute;
+  left: calc(var(--s) * 1160);
+  top:  calc(var(--s) * 413);
+  transform: translateX(-50%);  /*centering*/
+  text-align: center;
+  white-space: nowrap;
+}
+
+.hero-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--s) * 29);
+}
+.hero-avatar { width: calc(var(--s) * 140); height: auto; }
+
+.hero-title h1 {
+  margin: 0;
+  padding-top: calc(var(--s) * 20);
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: calc(var(--s) * 84);
+  line-height: 1;
+}
+.hero-title .green { color: var(--green); }
+.hero-title .brown { color: var(--brown); }
+
+.hero-blurb {
+  margin: calc(var(--s) * 5) 0 calc(var(--s) * 40);
+  font-size: calc(var(--s) * 40);
+  line-height: calc(var(--s) * 46);
+}
+
+.resume-btn {
+  display: inline-block;
+  padding: 0.2em 1em;
+  font-size: max(16px, calc(var(--s) * 34));
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  border: 2px solid var(--brown);
+  border-radius: 16px;
+  transition: background 0.2s, color 0.2s;
+}
+.resume-btn:hover { background: var(--brown); color: #fff; }
+
+
+/* experience */
+.sprout-title {
+  position: relative;
+  left: calc(var(--s) * 316);
+  width: calc(var(--s) * 1188);
+  margin: 0;
+}
+.sprout-title img { width: 100%; height: auto; }
+
+.stem {  /* grows relative to # of experiences */
+  position: relative;
+  min-height: calc(var(--s) * 1500);   /* doesn't get shorter than its original design height tho */
+  padding: calc(var(--s) * 30) 0 calc(var(--s) * 40);
+}
+.stem-img {
+  position: absolute;
+  left: calc(var(--s) * 800);
+  top: 0;
+  width:  calc(var(--s) * 250);
+  height: 100%;
+}
+
+/* job entries */
+.entry {
+  --stem-x: calc(var(--s) * 925);
+  --logo: max(52px, calc(var(--s) * 120));
+  --gap: max(20px, calc(var(--s) * 60));
+  position: relative;
+  min-height: var(--logo);
+  margin-bottom: max(40px, calc(var(--s) * 120));
+  font-size: var(--text-size);
+}
+
+.logo {
+  position: absolute;
+  top: 0;
+  left: calc(var(--stem-x) - var(--logo) / 2);
+  width: var(--logo);
+  height: var(--logo);
+  object-fit: cover;
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 2px var(--brown);
+}
+
+.entry-date {
+  position: absolute;
+  top: 0;
+  margin: 0;
+  height: var(--logo);
+  display: flex;
+  align-items: center;
+  font-size: 1.15em;
+  color: var(--brown-light);
+  white-space: nowrap;
+}
+.entry.left  .entry-date { left:  calc(var(--stem-x) + var(--logo) / 2 + var(--gap)); }
+.entry.right .entry-date { right: calc(100% - var(--stem-x) + var(--logo) / 2 + var(--gap)); }
+
+.entry-text { max-width: calc(var(--s) * 640); }
+.entry.left .entry-text {
+  margin-left: calc(var(--stem-x) - var(--logo) / 2 - var(--gap) - var(--s) * 640);
+  text-align: right;
+}
+.entry.right .entry-text {
+  margin-left: calc(var(--stem-x) + var(--logo) / 2 + var(--gap));
+  max-width: calc(var(--s) * 520);
+}
+
+.entry h3 {
+  margin: 0;
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 1.35em;
+  line-height: 1.15;
+}
+.entry-org  { margin: 0.1em 0 0.5em; font-style: italic; color: var(--brown-light); }
+.entry-desc { margin: 0; }
+
+/* highlighted words */
+strong {
+  font-weight: 400;
+  background: linear-gradient(transparent 60%, rgba(190, 206, 104, 0.6) 60%);
+}
+
+
+/* pop up animation for job entries */
+.js .reveal {
+  opacity: 0;
+  transform: translate(var(--from, 0px), var(--up, 0px)) scale(var(--grow, 0.88));
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.js .reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+/* entries grow out of the side that faces the stem */
+.entry { --up: 28px; --grow: 1; }   /* entries float up instead of growing */
+.card  { transform-origin: center bottom; --from: 0px; }
+
+/* no animation for reduced motion*/
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+
+/* projects hill */
+.hill-top, .hill-bottom { width: 100%; height: auto; }
+
+.hill-body {
+  position: relative;
+  margin: -1px 0;
+  padding: calc(var(--s) * 20) 0 calc(var(--s) * 60);
+  background: var(--hill);
+}
+
+.sign {
+  position: absolute;
+  left: calc(var(--s) * 117);
+  top:  calc(var(--s) * -298);
+  width: calc(var(--s) * 344);
+  margin: 0;
+}
+.sign img { width: 100%; height: auto; }
+
+.projects-grid {
+  position: relative;
+  width: min(92vw, 1100px);
+  margin: 0 auto;
+  display: grid;
+  /* as many columns as fit, each at least 270px wide */
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 22px;
+}
+
+.card {
+  padding: 0.8em 1.1em 1.1em;
+  font-size: var(--text-size);
+  background: #fff;
+  border: 2px solid var(--brown);
+  border-radius: 22px 26px 20px 24px;
+}
+.card h3 {
+  margin: 0.05em 0 0;
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 1.5em;
+  line-height: 1.1;
+}
+.card p { margin: 0.5em 0 0; }
+.card .card-date { margin: 0; font-size: 0.9em; color: var(--brown-light); }
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35em;
+  margin: 0.6em 0 0;
+  padding: 0;
+  list-style: none;
+}
+.tags li {
+  padding: 0 0.65em;
+  font-size: 0.85em;
+  background: rgba(190, 206, 104, 0.35);
+  border: 1.5px solid var(--brown);
+  border-radius: 999px;
+}
+
+.card-link {
+  display: inline-block;
+  margin-top: 0.7em;
+  text-decoration: none;
+  border-bottom: 2px solid var(--green);
+}
+.card-link:hover { background: var(--green); }
+
+
+/* footer */
+.footer { height: calc(var(--s) * 492); }
+.footer .canvas { height: 100%; }
+
+.thanks {
+  position: absolute;
+  left: calc(var(--s) * 983);
+  top:  calc(var(--s) * 70);
+  margin: 0;
+  font-family: var(--font-note);
+  font-size: calc(var(--s) * 62);
+  line-height: 1.2;
+  white-space: nowrap;
+  color: var(--brown-light);
+}
+
+.social { transition: transform 0.2s; }
+.social:hover { transform: scale(1.12) rotate(-5deg); }
+
+
+/* small screens / mobile */
+@media (max-width: 999px) {
+
+  /* every entry puts its text on the right of the stem, with the date
+     above the title, so nothing needs the room on the left */
+  .entry { display: flex; flex-direction: column; }
+  .entry.left .entry-text,
+  .entry.right .entry-text {
+    margin-left: calc(var(--stem-x) + var(--logo) / 2 + var(--gap));
+    margin-right: calc((var(--canvas-w) - 100vw) / 2 + 14px);   /* keep text inside the visible screen */
+    max-width: none !important;
+    text-align: left;
+  }
+  .entry.left .entry-date,
+  .entry.right .entry-date {
+    position: static;
+    order: -1;
+    height: auto;
+    margin: 0 calc((var(--canvas-w) - 100vw) / 2 + 14px) 0.2em calc(var(--stem-x) + var(--logo) / 2 + var(--gap));
+    font-size: 0.95em;
+  }
+
+  /* the sign moves into the flow, centred above the cards */
+  .sign {
+    position: static;
+    width: 190px;
+    margin: 0 auto 18px;
+  }
+}
+
+
+/* project images */
+.card-img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  /* margin-bottom: 0.7em; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  object-fit: cover; /* crops */
+  /* border: 2px dashed var(--brown-light); */
+  border-radius: 14px;
+  background: rgba(190, 206, 104, 0.2);
+  color: var(--brown-light);
+}
+
+
+/* animations */
+@media (prefers-reduced-motion: no-preference) {
+
+  /* clouds */
+  @keyframes drift {
+    from { transform: translateX(calc(var(--s) * -50)); }
+    to   { transform: translateX(calc(var(--s) *  50)); }
+  }
+  .clouds {
+    animation: drift 3s ease-in-out infinite alternate;
+  }
+
+  /* fish bob up and down */
+  @keyframes bob-fish {
+    from { transform: translateY(calc(var(--s) * -10)); }
+    to   { transform: translateY(calc(var(--s) *  10)); }
+  }
+  .fish {
+    animation: bob-fish 1.5s ease-in-out infinite alternate;
+  }
+
+  /* the swimming duck paddles around a small loop.
+     Each percentage is a stop on the way; the browser fills in between. */
+  @keyframes swim {
+    0%   { transform: translate(0, 0); }
+    25%  { transform: translate(calc(var(--s) * 40), calc(var(--s) * -6)); }
+    50%  { transform: translate(calc(var(--s) * 70), calc(var(--s) * 4)); }
+    75%  { transform: translate(calc(var(--s) * 30), calc(var(--s) * 8)); }
+    100% { transform: translate(0, 0); }
+  }
+  .duck-swim {
+    animation: swim 6s ease-in-out infinite;
+  }
+
+  /* the girl and flower plant float together */
+  @keyframes float {
+    from { transform: translateY(calc(var(--s) * -20)); }
+    to   { transform: translateY(calc(var(--s) *  12)); }
+  }
+  .girl,
+  .flower-plant {
+    animation: float 2s ease-in-out infinite alternate;
+  }
+}
